@@ -1,14 +1,9 @@
 public class Main {
 
     public static void main(String[] args) {
-        int one = Integer.parseInt(args[0]);
-        int two = Integer.parseInt(args[1]);
-        int three = Integer.parseInt(args[2]);
-        if (one == two && two == three){
-            System.out.println(true);
-        } else {
-            System.out.println(false);
-        }
+        double t = 9.0;
+        while (Math.abs(t - 9.0/t) > .001)
+            t = (9.0/t + t) / 2.0;
+        StdOut.printf("%.5f\n", t);
     }
-
 }
