@@ -1,8 +1,9 @@
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println('b');
-        System.out.println('b' + 'c');
-        System.out.println((char) ('a' + 4));
+        String s = "";
+        for (int n = 6; n > 0; n /= 2)
+            s = (n % 2) + s;
+        System.out.println(s);
     }
 }
