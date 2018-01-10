@@ -1,18 +1,26 @@
 public class Main {
 
     public static void main(String[] args) {
-        assert lg(8) == 3 - 1;
-        assert lg(16) == 4 - 1;
-        assert lg(128) == 7 - 1;
-        System.out.println("Test: OK!");
+        int[] a = {5, 4, 1, 1, 0, 4, 21, 1, 2, 1};
+        int[] histogram = histogram(a, 6);
+        for (int i = 0; i < histogram.length; i++) {
+            System.out.println("" + i + " : " + histogram[i]);
+        }
     }
 
-    public static int lg(int N) {
-        int power = 0;
-        while(N > 1){
-            N /= 2;
-            power++;
+    public static int[] histogram(int[] a, int M) {
+        int[] hist = new int[M];
+        for(int i = 0; i < M; i++){
+            hist[i] = searchAndCount(a, i);
         }
-        return power - 1;
+        return hist;
+    }
+
+    public static int searchAndCount(int[] a, int needle) {
+        int count = 0;
+        for(int i = 0; i < a.length; i++){
+            if (a[i] == needle) count++;
+        }
+        return count;
     }
 }
