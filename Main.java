@@ -1,22 +1,18 @@
 public class Main {
 
     public static void main(String[] args) {
-        String[][] arrPre = new String[10][10];
-        String[][] arrPost = new String[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++){
-                arrPre[i][j] = " " + i + j + " ";
-                System.out.print(arrPre[i][j]);
-            }
-            System.out.println();
+        assert lg(8) == 3 - 1;
+        assert lg(16) == 4 - 1;
+        assert lg(128) == 7 - 1;
+        System.out.println("Test: OK!");
+    }
+
+    public static int lg(int N) {
+        int power = 0;
+        while(N > 1){
+            N /= 2;
+            power++;
         }
-        System.out.println();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++){
-                arrPost[i][j] = arrPre[j][i];
-                System.out.print(arrPost[i][j]);
-            }
-            System.out.println();
-        }
+        return power - 1;
     }
 }
