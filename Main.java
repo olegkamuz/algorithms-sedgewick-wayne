@@ -1,18 +1,12 @@
 public class Main {
 
     public static void main(String[] args) {
-        assert lg(8) == 3 - 1;
-        assert lg(16) == 4 - 1;
-        assert lg(128) == 7 - 1;
-        System.out.println("Test: OK!");
+        System.out.println(factorial(14));
     }
 
-    public static int lg(int N) {
-        int power = 0;
-        while(N > 1){
-            N /= 2;
-            power++;
-        }
-        return power - 1;
+    public static long factorial(int N) {
+        if (N == 1) return 1;
+        return N * factorial(N - 1);
     }
 }
+
