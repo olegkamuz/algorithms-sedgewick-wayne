@@ -1,19 +1,17 @@
 public class Main {
     public static void main(String[] args) {
-        int indent = 6;
-        Euclid(1111111, 1234567, indent);
+        int a = 33;
+        int b = 24;
+        int c = 15;
+        ascend(a, b, c);
     }
 
-    public static int Euclid(int p, int q, int indent) {
-        indent += 2;
-        System.out.printf("%" + indent + "d%9d", p, q);
-        System.out.println();
-        if (q == 0) {
-            System.out.printf("%1d", p);
-            return p;
-        }
-        int r = p % q;
-        return Euclid(q, r, indent);
+    public static void ascend(int a, int b, int c) {
+        int t;
+        if (a > b) { t = a; a = b; b = t; }
+        if (a > c) { t = a; a = c; c = t; }
+        if (b > c) { t = b; b = c; c = t; }
+        System.out.printf("a : %d, b : %d, c : %d", a, b, c);
     }
 }
 
