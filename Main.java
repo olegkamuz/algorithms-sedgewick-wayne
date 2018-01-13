@@ -1,17 +1,14 @@
 public class Main {
     public static void main(String[] args) {
-        int a = 33;
-        int b = 24;
-        int c = 15;
-        ascend(a, b, c);
+        int N = 5;
+        int k = 0;
+        System.out.println(binomial(N, k, .25));
     }
 
-    public static void ascend(int a, int b, int c) {
-        int t;
-        if (a > b) { t = a; a = b; b = t; }
-        if (a > c) { t = a; a = c; c = t; }
-        if (b > c) { t = b; b = c; c = t; }
-        System.out.printf("a : %d, b : %d, c : %d", a, b, c);
+    public static double binomial(int N, int k, double p) {
+        if (N == 0 && k == 0) return 1.0;
+        if (N < 0 || k < 0) return 0.0;
+        return (1.0 - p)*binomial(N-1, k, p) + p*binomial(N-1, k-1, p);
     }
 }
 
