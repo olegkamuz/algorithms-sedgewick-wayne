@@ -1,19 +1,52 @@
 public class Main {
     public static void main(String[] args) {
-        int[] arr = {3, 56, 30, 213, 7, 4, 9, 324, 10, 2, 8, 5, 1};
+        int[] arr = {3, 56, 30, 213, 56, 4, 4, 324, 10, 2, 8, 5, 2};
         int[] numbers = {56, 56, 11, 8, 0, 33, 2, 16};
-        arr = quicksort(arr);
-        System.out.print("not in list: ");
-        int[] notInList = BinCheck(arr, numbers, "+");
-        for(int i = 0; i < notInList.length; i++) {
-            System.out.print(notInList[i] + " ");
+        arr = quickSort(arr);
+        int[] noDuplicatesArr = removeDuplicates(arr);
+        for(int i = 0; i < noDuplicatesArr.length; i++) {
+            System.out.print(noDuplicatesArr[i] + " ");
         }
-        int[] inList = BinCheck(arr, numbers, "-");
-        System.out.println();
-        System.out.print("in list: ");
-        for(int i = 0; i < inList.length; i++) {
-            System.out.print(inList[i] + " ");
+    }
+
+    private static int[] removeDuplicates(int[] whitelist) {
+        Helper helper = changeDuplicatesWithMinusOne(whitelist);
+        whitelist = helper.whitelist;
+        int duplicateCount = helper.duplicateCount;
+
+        int[] noDuplicatesArr = makeNoDuplicatesArr(whitelist, duplicateCount);
+        return noDuplicatesArr;
+    }
+
+    private static int[] makeNoDuplicatesArr(int[] whitelist, int duplicateCount) {
+        int[] noDuplicatesArr;
+        int count;
+        count = whitelist.length - duplicateCount;
+        noDuplicatesArr = new int[count];
+        for (int i = 0, j = 0; i < whitelist.length; i++){
+            if (whitelist[i] != -1) {
+                noDuplicatesArr[j] = whitelist[i];
+                j++;
+            }
         }
+
+        return noDuplicatesArr;
+    }
+
+    private static Helper changeDuplicatesWithMinusOne(int[] whitelist) {
+        int duplicateCount = 0;
+        for (int i = 0; i < whitelist.length; i++){
+            for (int j = 0; j < whitelist.length; j++) {
+                if (i != j && whitelist[i] == whitelist[j] && whitelist[i] != -1) {
+                    whitelist[j] = -1;
+                    duplicateCount++;
+                }
+            }
+        }
+        Helper object = new Helper ();
+        object.whitelist = whitelist;
+        object.duplicateCount = duplicateCount;
+        return object;
     }
 
     public static int[] BinCheck(int[] arr, int[] numbers, String inOrNot) {
@@ -50,7 +83,7 @@ public class Main {
         else return mid;
     }
 
-    public static int[] quicksort(int[] a){
+    public static int[] quickSort(int[] a){
         int temp;
         for(int j = 0; j < a.length; j++){
             for(int i = 0; i < a.length; i++){
@@ -65,3 +98,7 @@ public class Main {
     }
 }
 
+class Helper {
+    int[] whitelist;
+    int duplicateCount;
+}
