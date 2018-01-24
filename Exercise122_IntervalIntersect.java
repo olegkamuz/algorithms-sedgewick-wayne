@@ -58,3 +58,4 @@ class IntersectInterval{
         this.secondInterval = secondInterval;
     }
 }
+
