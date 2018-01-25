@@ -1,14 +1,38 @@
 import java.awt.Color;
 public class Exercise123_Interval2DIntersect {
     public static void main(String[] args){
-        int N = 30;
+        int N = 50;
         Interval2DHelper[] interval2DArr = makeInterval2DArr(N);
+        drawAllIntervals(N, interval2DArr, 50);
         IntersectInterval2D[] intersectIntervals = calculateIntersects(N, interval2DArr);
-        ContainsInterval2D[] containsIntervals = calculateContains(N, interval2DArr);
-//        printIntersectIntervalsPairs(intersectIntervals);
+        drawIntersectPairs(intersectIntervals, 300);
+        printIntersectIntervalsPairs(intersectIntervals);
         System.out.println();
+        ContainsInterval2D[] containsIntervals = calculateContains(N, interval2DArr);
+        drawContainsPairs(containsIntervals, 1000);
         printContainsIntervalsPairs(containsIntervals);
+        // TODO printIntersectAndContainsCounts(intersectIntervals,containsIntervals);
 
+    }
+    private static boolean checkIntersects(IntersectInterval2D[] intersectIntervals){
+        for (int i = 0; i < intersectIntervals.length - 1; i++) {
+            for (int j = 0; j < intersectIntervals.length; j++) {
+                if (intersectIntervals[i].firstInterval.equals(intersectIntervals[i + 1].secondInterval) &&
+                        intersectIntervals[i].secondInterval.equals(intersectIntervals[i + 1].firstInterval)   ) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private static Interval2DHelper[] makeTestInterval2DArr(int N){
+        Interval2DHelper[] intervalArr = new Interval2DHelper[N];
+        intervalArr[0] = new Interval2DHelper(new Interval1D(0.02, 0.99), new Interval1D(0.55, 0.6));
+        intervalArr[1] = new Interval2DHelper(new Interval1D(0.02, 0.99), new Interval1D(0.65, 0.75));
+        intervalArr[2] = new Interval2DHelper(new Interval1D(0.02, 0.99), new Interval1D(0.45, 0.5));
+        intervalArr[3] = new Interval2DHelper(new Interval1D(0.6, 0.7), new Interval1D(0.15, 0.7));
+        intervalArr[4] = new Interval2DHelper(new Interval1D(0.1, 0.8), new Interval1D(0.1, 0.9));
+        return intervalArr;
     }
     private static Interval2DHelper[] makeInterval2DArr(int N){
         Interval2DHelper[] intervalArr = new Interval2DHelper[N];
@@ -32,10 +56,6 @@ public class Exercise123_Interval2DIntersect {
             Interval1D intervalX = new Interval1D(minX, maxX);
             Interval1D intervalY = new Interval1D(minY, maxY);
             intervalArr[i] = new Interval2DHelper(intervalX, intervalY);
-            StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
-            StdDraw.setScale(0.0, 1.0);
-            StdDraw.setPenRadius(.003);
-            StdDraw.rectangle(minX+(maxX - minX)/2, minY+(maxY - minY)/2, (maxX - minX)/2,(maxY - minY)/2) ;
         }
         return intervalArr;
     }
@@ -81,22 +101,10 @@ public class Exercise123_Interval2DIntersect {
         }
         return noNullsArr;
     }
-    private static void printIntersectIntervalsPairs(IntersectInterval2D[] arr){
-//        System.out.println("Intersecting intervals respective pairs: ");
-        for (int i = 0; i < arr.length; i++) {
-            StdDraw.setPenRadius(0.005);
-            StdDraw.setPenColor(StdDraw.RED);
-            double minX = arr[i].firstInterval.x.min();
-            double maxX = arr[i].firstInterval.x.max();
-            double minY = arr[i].firstInterval.y.min();
-            double maxY = arr[i].firstInterval.y.max();
-                        StdDraw.rectangle(minX+(maxX - minX)/2, minY+(maxY - minY)/2, (maxX - minX)/2,(maxY - minY)/2) ;
-            double minXsecond = arr[i].secondInterval.x.min();
-            double maxXsecond = arr[i].secondInterval.x.max();
-            double minYsecond = arr[i].secondInterval.y.min();
-            double maxYsecond = arr[i].secondInterval.y.max();
-            StdDraw.rectangle(minXsecond+(maxXsecond - minXsecond)/2, minYsecond+(maxYsecond - minYsecond)/2, (maxXsecond - minXsecond)/2,(maxYsecond - minYsecond)/2) ;
 
+    private static void printIntersectIntervalsPairs(IntersectInterval2D[] arr){
+        System.out.println("Intersecting intervals respective pairs: ");
+        for (int i = 0; i < arr.length; i++) {
             System.out.printf("min: %1.4f max:%1.4f min: %1.4f max %1.4f",arr[i].firstInterval.x.min(), arr[i].firstInterval.x.max(), arr[i].secondInterval.y.min(), arr[i].secondInterval.y.max());
             System.out.println();
         }
@@ -104,11 +112,53 @@ public class Exercise123_Interval2DIntersect {
     private static void printContainsIntervalsPairs(ContainsInterval2D[] arr){
         System.out.println("Containing intervals respective pairs: ");
         for (int i = 0; i < arr.length; i++) {
-            StdDraw.setPenRadius(.003);
-            int r = StdRandom.uniform(0, 255);
-            int g = StdRandom.uniform(0, 255);
-            int b = StdRandom.uniform(0, 255);
-            StdDraw.setPenColor(r, g, b);
+            System.out.printf("Xmin: %1.4f Xmax:%1.4f Ymin: %1.4f Ymax %1.4f",arr[i].firstInterval.x.min(), arr[i].firstInterval.x.max(), arr[i].firstInterval.y.min(), arr[i].firstInterval.y.max());
+            System.out.println();
+            System.out.printf("Xmin: %1.4f Xmax:%1.4f Ymin: %1.4f Ymax %1.4f",arr[i].secondInterval.x.min(), arr[i].secondInterval.x.max(), arr[i].secondInterval.y.min(), arr[i].secondInterval.y.max());
+            System.out.println();
+            System.out.println();
+        }
+    }
+
+    private static void drawAllIntervals(int N, Interval2DHelper[] intervalArr, int speed){
+        StdDraw.setPenRadius(.004);
+        StdDraw.setPenColor(StdDraw.BLUE);
+        for (int i = 0; i < intervalArr.length; i++) {
+            double minX = intervalArr[i].x.min();
+            double maxX = intervalArr[i].x.max();
+            double minY = intervalArr[i].y.min();
+            double maxY = intervalArr[i].y.max();
+            StdDraw.rectangle(minX+(maxX - minX)/2, minY+(maxY - minY)/2, (maxX - minX)/2,(maxY - minY)/2) ;
+            StdDraw.pause(speed);
+        }
+        StdDraw.pause(2000);
+
+    }
+    private static void drawContainsPairs(ContainsInterval2D[] arr, int speed){
+        for (int i = 0; i < arr.length; i++) {
+            StdDraw.setPenRadius(.005);
+            StdDraw.setPenColor(StdDraw.GREEN);
+            double minX = arr[i].firstInterval.x.min();
+            double maxX = arr[i].firstInterval.x.max();
+            double minY = arr[i].firstInterval.y.min();
+            double maxY = arr[i].firstInterval.y.max();
+            StdDraw.rectangle(minX + (maxX - minX) / 2, minY + (maxY - minY) / 2, (maxX - minX) / 2, (maxY - minY) / 2);
+            double minXsecond = arr[i].secondInterval.x.min();
+            double maxXsecond = arr[i].secondInterval.x.max();
+            double minYsecond = arr[i].secondInterval.y.min();
+            double maxYsecond = arr[i].secondInterval.y.max();
+            StdDraw.rectangle(minXsecond + (maxXsecond - minXsecond) / 2, minYsecond + (maxYsecond - minYsecond) / 2, (maxXsecond - minXsecond) / 2, (maxYsecond - minYsecond) / 2);
+            StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
+            StdDraw.setPenRadius(.006);
+            StdDraw.pause(speed);
+            StdDraw.rectangle(minX + (maxX - minX) / 2, minY + (maxY - minY) / 2, (maxX - minX) / 2, (maxY - minY) / 2);
+            StdDraw.rectangle(minXsecond + (maxXsecond - minXsecond) / 2, minYsecond + (maxYsecond - minYsecond) / 2, (maxXsecond - minXsecond) / 2, (maxYsecond - minYsecond) / 2);
+        }
+    }
+    private static void drawIntersectPairs(IntersectInterval2D[] arr, int speed){
+        for (int i = 0; i < arr.length; i++) {
+            StdDraw.setPenRadius(.004);
+            StdDraw.setPenColor(StdDraw.RED);
             double minX = arr[i].firstInterval.x.min();
             double maxX = arr[i].firstInterval.x.max();
             double minY = arr[i].firstInterval.y.min();
@@ -119,15 +169,14 @@ public class Exercise123_Interval2DIntersect {
             double minYsecond = arr[i].secondInterval.y.min();
             double maxYsecond = arr[i].secondInterval.y.max();
             StdDraw.rectangle(minXsecond+(maxXsecond - minXsecond)/2, minYsecond+(maxYsecond - minYsecond)/2, (maxXsecond - minXsecond)/2,(maxYsecond - minYsecond)/2) ;
-            StdDraw.pause(500);
+            StdDraw.setPenRadius(.006);
             StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
+            StdDraw.pause(speed);
+            StdDraw.rectangle(minX+(maxX - minX)/2, minY+(maxY - minY)/2, (maxX - minX)/2,(maxY - minY)/2) ;
             StdDraw.rectangle(minXsecond+(maxXsecond - minXsecond)/2, minYsecond+(maxYsecond - minYsecond)/2, (maxXsecond - minXsecond)/2,(maxYsecond - minYsecond)/2) ;
-//            System.out.printf("Xmin: %1.4f Xmax:%1.4f Ymin: %1.4f Ymax %1.4f",arr[i].firstInterval.x.min(), arr[i].firstInterval.x.max(), arr[i].firstInterval.y.min(), arr[i].firstInterval.y.max());
-//            System.out.println();
-//            System.out.printf("Xmin: %1.4f Xmax:%1.4f Ymin: %1.4f Ymax %1.4f",arr[i].secondInterval.x.min(), arr[i].secondInterval.x.max(), arr[i].secondInterval.y.min(), arr[i].secondInterval.y.max());
-//            System.out.println();
-//            System.out.println();
+            StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
         }
+
     }
 }
 
