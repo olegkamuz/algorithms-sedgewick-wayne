@@ -1,38 +1,18 @@
 import java.awt.Color;
 public class Exercise123_Interval2DIntersect {
     public static void main(String[] args){
-        int N = 50;
+        int N = 13;
         Interval2DHelper[] interval2DArr = makeInterval2DArr(N);
-        drawAllIntervals(N, interval2DArr, 50);
+        drawAllIntervals(interval2DArr, 500);
         IntersectInterval2D[] intersectIntervals = calculateIntersects(N, interval2DArr);
-        drawIntersectPairs(intersectIntervals, 300);
+        drawIntersectPairs(intersectIntervals, 1000);
         printIntersectIntervalsPairs(intersectIntervals);
         System.out.println();
         ContainsInterval2D[] containsIntervals = calculateContains(N, interval2DArr);
         drawContainsPairs(containsIntervals, 1000);
         printContainsIntervalsPairs(containsIntervals);
-        // TODO printIntersectAndContainsCounts(intersectIntervals,containsIntervals);
+        printIntersectAndContainsCounts(intersectIntervals,containsIntervals);
 
-    }
-    private static boolean checkIntersects(IntersectInterval2D[] intersectIntervals){
-        for (int i = 0; i < intersectIntervals.length - 1; i++) {
-            for (int j = 0; j < intersectIntervals.length; j++) {
-                if (intersectIntervals[i].firstInterval.equals(intersectIntervals[i + 1].secondInterval) &&
-                        intersectIntervals[i].secondInterval.equals(intersectIntervals[i + 1].firstInterval)   ) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    private static Interval2DHelper[] makeTestInterval2DArr(int N){
-        Interval2DHelper[] intervalArr = new Interval2DHelper[N];
-        intervalArr[0] = new Interval2DHelper(new Interval1D(0.02, 0.99), new Interval1D(0.55, 0.6));
-        intervalArr[1] = new Interval2DHelper(new Interval1D(0.02, 0.99), new Interval1D(0.65, 0.75));
-        intervalArr[2] = new Interval2DHelper(new Interval1D(0.02, 0.99), new Interval1D(0.45, 0.5));
-        intervalArr[3] = new Interval2DHelper(new Interval1D(0.6, 0.7), new Interval1D(0.15, 0.7));
-        intervalArr[4] = new Interval2DHelper(new Interval1D(0.1, 0.8), new Interval1D(0.1, 0.9));
-        return intervalArr;
     }
     private static Interval2DHelper[] makeInterval2DArr(int N){
         Interval2DHelper[] intervalArr = new Interval2DHelper[N];
@@ -119,8 +99,11 @@ public class Exercise123_Interval2DIntersect {
             System.out.println();
         }
     }
+    private static void printIntersectAndContainsCounts(IntersectInterval2D[] intersect, ContainsInterval2D[] contains){
+        System.out.printf("Intersects: %1d, Contains: %1d", intersect.length, contains.length);
+    }
 
-    private static void drawAllIntervals(int N, Interval2DHelper[] intervalArr, int speed){
+    private static void drawAllIntervals(Interval2DHelper[] intervalArr, int speed){
         StdDraw.setPenRadius(.004);
         StdDraw.setPenColor(StdDraw.BLUE);
         for (int i = 0; i < intervalArr.length; i++) {
@@ -154,6 +137,7 @@ public class Exercise123_Interval2DIntersect {
             StdDraw.rectangle(minX + (maxX - minX) / 2, minY + (maxY - minY) / 2, (maxX - minX) / 2, (maxY - minY) / 2);
             StdDraw.rectangle(minXsecond + (maxXsecond - minXsecond) / 2, minYsecond + (maxYsecond - minYsecond) / 2, (maxXsecond - minXsecond) / 2, (maxYsecond - minYsecond) / 2);
         }
+        StdDraw.pause(2000);
     }
     private static void drawIntersectPairs(IntersectInterval2D[] arr, int speed){
         for (int i = 0; i < arr.length; i++) {
@@ -176,7 +160,7 @@ public class Exercise123_Interval2DIntersect {
             StdDraw.rectangle(minXsecond+(maxXsecond - minXsecond)/2, minYsecond+(maxYsecond - minYsecond)/2, (maxXsecond - minXsecond)/2,(maxYsecond - minYsecond)/2) ;
             StdDraw.setPenColor(StdDraw.LIGHT_GRAY);
         }
-
+        StdDraw.pause(2000);
     }
 }
 
