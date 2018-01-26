@@ -1,4 +1,4 @@
-public class Histogram {
+public class Exersice1132_DrawHistogram {
     public static void main(String[] args){
         double[] sequence = makeSequence();
         showSequence(sequence);

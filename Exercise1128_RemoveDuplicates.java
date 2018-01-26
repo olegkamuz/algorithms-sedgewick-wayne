@@ -1,4 +1,4 @@
-public class Main {
+public class Exercise1128_RemoveDuplicates {
     public static void main(String[] args) {
         int[] arr = {3, 56, 30, 213, 56, 4, 4, 324, 10, 2, 8, 5, 2};
         int[] numbers = {56, 56, 11, 8, 0, 33, 2, 16};
@@ -119,3 +119,4 @@ class Helper {
     int[] whitelist;
     int duplicateCount;
 }
+

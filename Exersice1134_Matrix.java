@@ -1,4 +1,4 @@
-public class Matrix {
+public class Exersice1134_Matrix {
     public static void main(String[] args) {
         double[] x = {1, 2, 3, 4} ;
         double[] y = {7, 8, 9, 3};
