@@ -1,16 +1,14 @@
 public class BinSearch {
-    public static int binSearch(int[] a, int i) {
-        int hi = a.length;
-        int low = 0;
-        int mid;
-        while (low < hi) {
-            mid = (low - hi)/2;
-            if (a[mid] == i) return i;
-            if(i > a[mid]) {
-                low = mid + 1;
-            }else{
-                hi = mid - 1;
-            }
+    public static int rank(int key, int[] a)
+    {
+        int lo = 0;
+        int hi = a.length - 1;
+        while (lo <= hi)
+        {
+            int mid = lo + (hi - lo) / 2;
+            if (key < a[mid]) hi = mid - 1;
+            else if (key > a[mid]) lo = mid + 1;
+            else return mid;
         }
         return -1;
     }
