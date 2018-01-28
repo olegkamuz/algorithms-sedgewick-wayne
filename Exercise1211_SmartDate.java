@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Exercise1211_SmartDate {
     private final int day;
     private final int month;
@@ -39,15 +43,31 @@ public class Exercise1211_SmartDate {
         }
     }
     private boolean isLeapYear(){
-        if(year % 4 == 0 || year % 100 == 0 && year % 400 == 0){
-            return true;
+        if(year % 400 == 0) return true;
+        if(year % 100 == 0) return false;
+        return year % 4 == 0;
+    }
+    public String dayOfTheWeek() {
+        String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+
+        Calendar calendar = Calendar.getInstance();
+        java.util.Date date;
+
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(this.toString());
+            calendar.setTime(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        return false;
+
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        return days[dayOfWeek - 1];
     }
 
     public static void main(String[] args){
-        Exercise1211_SmartDate date = new Exercise1211_SmartDate(3,12, 1977);
-        Exercise1211_SmartDate date2 = new Exercise1211_SmartDate(31,14, 2003);
-
+        Exercise1211_SmartDate testDate1 = new Exercise1211_SmartDate(3,12, 1977);
+        System.out.println(testDate1.dayOfTheWeek());
+//        Exercise1211_SmartDate testDate2 = new Exercise1211_SmartDate(31,14, 2003);
+//        System.out.println(testDate2.dayOfTheWeek());
     }
 }
