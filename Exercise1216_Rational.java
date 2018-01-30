@@ -30,28 +30,28 @@ public class Exercise1216_Rational {
         return this.denominator;
     }
     public Exercise1216_Rational plus(Exercise1216_Rational b) {
-        long newNumerator = this.numerator * b.denominator + b.numerator * this.denominator;
-        long newDenominator = this.denominator * b.denominator;
+        long newNumerator = this.numerator * b.denominator() + b.numerator() * this.denominator;
+        long newDenominator = this.denominator * b.denominator();
 
         Exercise1216_Rational newRational = new Exercise1216_Rational(newNumerator, newDenominator);
         return newRational;
     }
     public Exercise1216_Rational minus(Exercise1216_Rational b) {
-        long newNumerator = this.numerator * b.denominator - b.numerator * this.denominator;
-        long newDenominator = this.denominator * b.denominator;
+        long newNumerator = this.numerator * b.denominator() - b.numerator() * this.denominator;
+        long newDenominator = this.denominator * b.denominator();
 
         Exercise1216_Rational newRational = new Exercise1216_Rational(newNumerator, newDenominator);
         return newRational;
     }
     public Exercise1216_Rational times(Exercise1216_Rational b) { long newNumerator = this.numerator * b.numerator;
-        long newDenominator = this.denominator * b.denominator;
+        long newDenominator = this.denominator * b.denominator();
 
         Exercise1216_Rational newRational = new Exercise1216_Rational(newNumerator, newDenominator);
         return newRational;
     }
     public Exercise1216_Rational divides(Exercise1216_Rational b) {
-        long newNumerator = this.numerator * b.denominator;
-        long newDenominator = this.denominator * b.numerator;
+        long newNumerator = this.numerator * b.denominator();
+        long newDenominator = this.denominator * b.numerator();
 
         Exercise1216_Rational newRational = new Exercise1216_Rational(newNumerator, newDenominator);
         return newRational;
@@ -61,7 +61,7 @@ public class Exercise1216_Rational {
         if (that == null) return false;
         if (that.getClass() != this.getClass()) return false;
         Exercise1216_Rational rational = (Exercise1216_Rational) that;
-        return (this.numerator == that.numerator && this.denominator == that.denominator);
+        return (this.numerator == that.numerator() && this.denominator == that.denominator());
     }
     public String toString(){
         return this.numerator + "/" + this.denominator;
