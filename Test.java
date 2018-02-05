@@ -1,16 +1,31 @@
-public class Test
-{
-    public static void main(String[] args){
-        System.out.println(mystery("abc"));
+public class Test {
+    public static void main(String[] args) {
+        int G = 0;
+        System.out.println(++G);
+        System.out.println(G);
     }
 
-    public static String mystery(String s)
-    {
-        int N = s.length();
-        if (N <= 1) return s;
-        String a = s.substring(0, N/2);
-        String b = s.substring(N/2, N);
-        return mystery(b) + mystery(a);
+    private String[] a; // stack entries
+    private int N;
+
+    public Test(int cap) {
+        a = new String[cap];
+    }
+
+    public boolean isEmpty() {
+        return N == 0;
+    }
+
+    public int size() {
+        return N;
+    }
+
+    public void push(String item) {
+        a[N++] = item;
+    }
+
+    public String pop() {
+        return a[--N];
     }
 }
 
