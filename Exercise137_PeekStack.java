@@ -1,13 +1,30 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Stack<Item> implements Iterable<Item> {
+public class Exercise137_PeekStack<Item> implements Iterable<Item> {
     private Node first;
     private int N;
+
+    public static void main(String[] args) {
+        Exercise137_PeekStack<String> peekStack = new Exercise137_PeekStack<String>();
+        peekStack.push("first");
+        peekStack.push("second");
+        peekStack.push("third");
+        StdOut.println("Peek: " + peekStack.peek());
+        StdOut.println("Pop: " + peekStack.pop());
+        StdOut.println("Peek: " + peekStack.peek());
+    }
 
     private class Node {
         Item item;
         Node next;
+    }
+
+    public Item peek() {
+        if (isEmpty()){
+            throw new NoSuchElementException();
+        }
+        return this.first.item;
     }
 
     public boolean isEmpty() {
