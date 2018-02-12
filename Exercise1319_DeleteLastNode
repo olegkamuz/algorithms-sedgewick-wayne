@@ -1,0 +1,5 @@
+current = first;
+while (current != null) {
+    current = current.next.next;
+}
+current.next = null;
