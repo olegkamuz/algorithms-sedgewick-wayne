@@ -38,7 +38,7 @@ public class LinkedList<Item> implements Iterable<Item> {
             } else current = current.next;
         }
     }
-    public void delete(int k) {
+    public void delete(int k) { // Exercise1320_DeleteKthNode
         if (isEmpty()) return;
         Node current = first;
         int count = 1;
@@ -68,6 +68,16 @@ public class LinkedList<Item> implements Iterable<Item> {
             } else current = current.next;
             count++;
         }
+    }
+    public boolean find(String key){
+        if (isEmpty()) return false;
+        Node current = first;
+        while (current != null) {
+            if (current.item == key) {
+                return true;
+            } else current = current.next;
+        }
+        return false;
     }
     public Iterator<Item> iterator() {
         return new ListIterator();
