@@ -69,7 +69,7 @@ public class LinkedList<Item> implements Iterable<Item> {
             count++;
         }
     }
-    public boolean find(String key){
+    public boolean find(Item key){
         if (isEmpty()) return false;
         Node current = first;
         while (current != null) {
@@ -79,17 +79,29 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
         return false;
     }
-    public void removeAfter(String key) {
+    public void removeAfter(Item key) {
         if(isEmpty()) return;
         Node current = first;
         while(current != null) {
-            if (current.item == key) {
+            if (current.item == key && current.next != null) {
                 current.next.item = null;
-                current.next = current.next.next;
+                if (current.next.next != null)current.next = current.next.next;
                 break;
             }
             current = current.next;
         }
+    }
+    public void insertAfter(Item key, Item insert) {
+        if(isEmpty()) return;
+        Node current = first;
+        while(current != null) {
+            if (current.item == key && current.next != null) {
+                current.next.item = insert;
+                break;
+            }
+            current = current.next;
+        }
+
     }
     public Iterator<Item> iterator() {
         return new ListIterator();
