@@ -154,6 +154,24 @@ public class LinkedList<Item> implements Iterable<Item> {
         return max;
     }
 
+    public LinkedList<Item> reverseTheList() {
+        LinkedList<Item> tempList = new LinkedList<>();
+        for (int j = 0; j < N; j++) {
+            Node current = first;
+            for (int i = 0; i < N; i++) {
+                if (current.next != null && current.next == last) {
+                    tempList.add(last.item);
+                    if (i == 0) tempList.add(current.item);
+                    current.next = null;
+                    last = current;
+                    if (i == 0) current.item = null;
+                }
+                if (current.next != null) current = current.next;
+            }
+        }
+        return tempList;
+    }
+
     public Iterator<Item> iterator() {
         return new ListIterator();
     }
