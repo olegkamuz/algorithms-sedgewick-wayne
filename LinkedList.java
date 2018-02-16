@@ -137,6 +137,23 @@ public class LinkedList<Item> implements Iterable<Item> {
         return max;
     }
 
+    public int maxRecursion() {
+        if (isEmpty()) return 0;
+        Node current = first;
+        int max = 0;
+        return maxRecursion(max, current);
+    }
+    public int maxRecursion(int max, Node current) {
+        if (current != null) {
+            if ((int)current.item > max) {
+                max = (int)current.item;
+            }
+            current = current.next;
+            return maxRecursion(max, current);
+        }
+        return max;
+    }
+
     public Iterator<Item> iterator() {
         return new ListIterator();
     }
