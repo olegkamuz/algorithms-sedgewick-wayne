@@ -79,6 +79,18 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
         return false;
     }
+    public void removeAfter(String key) {
+        if(isEmpty()) return;
+        Node current = first;
+        while(current != null) {
+            if (current.item == key) {
+                current.next.item = null;
+                current.next = current.next.next;
+                break;
+            }
+            current = current.next;
+        }
+    }
     public Iterator<Item> iterator() {
         return new ListIterator();
     }
