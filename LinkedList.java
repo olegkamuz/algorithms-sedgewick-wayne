@@ -172,6 +172,32 @@ public class LinkedList<Item> implements Iterable<Item> {
         return tempList;
     }
 
+    public LinkedList<Item> reverseTheListRecursion() {
+        LinkedList<Item> tempList = new LinkedList<>();
+        for (int j = 0; j < N; j++) {
+            Item temp = reverseTheListRecursion(first);
+            tempList.add(temp);
+        }
+        return tempList;
+    }
+    public Item reverseTheListRecursion(Node node){
+        Node current = node;
+        if (current.next == null && current == first){
+            Item temp = node.item;
+            first.next = null;
+            first.item = null;
+            return temp;
+        }
+        if (current.next != null && current.next == last) {
+            Node temp = last;
+            current.next = null;
+            last = current;
+            return temp.item;
+        }
+        if (current.next != null) current = current.next;
+        return reverseTheListRecursion(current);
+    }
+
     public Iterator<Item> iterator() {
         return new ListIterator();
     }

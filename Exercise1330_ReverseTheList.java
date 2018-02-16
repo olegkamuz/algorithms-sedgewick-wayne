@@ -8,9 +8,14 @@ public class Exercise1330_ReverseTheList {
         printList(linkedList);
         LinkedList<String> reversedList =  linkedList.reverseTheList();
         StdOut.println();
-        StdOut.println("Reversed List: ");
+        StdOut.println("Reversed List(Sequential): ");
         StdOut.println();
         printList(reversedList);
+        LinkedList<String> reversedAgainList = reversedList.reverseTheListRecursion();
+        StdOut.println();
+        StdOut.println("Reversed Again List(Recursion): ");
+        StdOut.println();
+        printList(reversedAgainList);
     }
     private static void printList(LinkedList<String> linkedList) {
         for (String s: linkedList) {
