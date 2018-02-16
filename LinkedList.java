@@ -4,14 +4,16 @@ public class LinkedList<Item> implements Iterable<Item> {
     public Node first;
     private Node last;
     private int N;
+
     private class Node {
         Item item;
         Node next;
     }
+
     public void add(Item string) {
         Node newNode = new Node();
         newNode.item = string;
-        if (first == null){
+        if (first == null) {
             first = newNode;
         }
         if (last == null) last = first;
@@ -21,13 +23,16 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
         N++;
     }
+
     public int size() {
         return N;
     }
+
     public boolean isEmpty() {
         return N == 0;
     }
-    public void deleteLast(){ // Exercise1319_DeleteLastNode
+
+    public void deleteLast() { // Exercise1319_DeleteLastNode
         if (isEmpty()) return;
         Node current = first;
         while (current != null && current.next != null) {
@@ -38,6 +43,7 @@ public class LinkedList<Item> implements Iterable<Item> {
             } else current = current.next;
         }
     }
+
     public void delete(int k) { // Exercise1320_DeleteKthNode
         if (isEmpty()) return;
         Node current = first;
@@ -50,7 +56,7 @@ public class LinkedList<Item> implements Iterable<Item> {
             if (count == k - 1) {
                 if (current.equals(last)) {
                     current = null;
-                } else if(current.next.equals(last)){
+                } else if (current.next.equals(last)) {
                     current.next.item = null; // loitering avoiding
                     current.next = null;
                     last = null;
@@ -69,7 +75,8 @@ public class LinkedList<Item> implements Iterable<Item> {
             count++;
         }
     }
-    public boolean find(Item key){
+
+    public boolean find(Item key) {
         if (isEmpty()) return false;
         Node current = first;
         while (current != null) {
@@ -79,22 +86,24 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
         return false;
     }
+
     public void removeAfter(Item key) {
-        if(isEmpty()) return;
+        if (isEmpty()) return;
         Node current = first;
-        while(current != null) {
+        while (current != null) {
             if (current.item == key && current.next != null) {
                 current.next.item = null;
-                if (current.next.next != null)current.next = current.next.next;
+                if (current.next.next != null) current.next = current.next.next;
                 break;
             }
             current = current.next;
         }
     }
+
     public void insertAfter(Item key, Item insert) {
-        if(isEmpty()) return;
+        if (isEmpty()) return;
         Node current = first;
-        while(current != null) {
+        while (current != null) {
             if (current.item == key && current.next != null) {
                 current.next.item = insert;
                 break;
@@ -103,19 +112,36 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
 
     }
+
+    public void remove(Item key) {
+        if (isEmpty()) return;
+        Node current = first;
+        while (current != null) {
+            if (current.next.item == key) {
+                current.next = current.next.next;
+            }
+            current = current.next;
+        }
+    }
+
     public Iterator<Item> iterator() {
         return new ListIterator();
     }
+
     private class ListIterator implements Iterator<Item> {
         private Node current = first;
+
         public boolean hasNext() {
             return current != null;
         }
+
         public Item next() {
             Item item = current.item;
             current = current.next;
             return item;
         }
-        public void remove(){}
+
+        public void remove() {
+        }
     }
 }
