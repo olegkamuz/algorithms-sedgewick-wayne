@@ -129,8 +129,8 @@ public class LinkedList<Item> implements Iterable<Item> {
         Node current = first;
         int max = 0;
         while (current != null) {
-            if ((int)current.item > max) {
-                max = (int)current.item;
+            if ((int) current.item > max) {
+                max = (int) current.item;
             }
             current = current.next;
         }
@@ -143,10 +143,11 @@ public class LinkedList<Item> implements Iterable<Item> {
         int max = 0;
         return maxRecursion(max, current);
     }
+
     public int maxRecursion(int max, Node current) {
         if (current != null) {
-            if ((int)current.item > max) {
-                max = (int)current.item;
+            if ((int) current.item > max) {
+                max = (int) current.item;
             }
             current = current.next;
             return maxRecursion(max, current);
@@ -180,9 +181,10 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
         return tempList;
     }
-    public Item reverseTheListRecursion(Node node){
+
+    public Item reverseTheListRecursion(Node node) {
         Node current = node;
-        if (current.next == null && current == first){
+        if (current.next == null && current == first) {
             Item temp = node.item;
             first.next = null;
             first.item = null;
@@ -196,6 +198,49 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
         if (current.next != null) current = current.next;
         return reverseTheListRecursion(current);
+    }
+
+    public LinkedList<Item> reverseAlternative() {
+        if (isEmpty()) return null;
+        if (first.next == null) return this;
+        Node reverse = null;
+        while (first != null) {
+            Node secondAlt = first.next;
+            first.next = reverse;
+            reverse = first;
+            first = secondAlt;
+        }
+        return makeList(reverse);
+    }
+
+    public LinkedList<Item> reverseAlternativeRecursion() {
+        if (isEmpty()) return null;
+        Node reverse = null;
+        if (first != null) {
+            reverse = reverseAlternativeRecursion(reverse);
+        }
+        return makeList(reverse);
+    }
+
+    private Node reverseAlternativeRecursion(Node reverse) {
+        if (first != null) {
+            Node second = first.next;
+            first.next = reverse;
+            reverse = first;
+            first = second;
+            reverse = reverseAlternativeRecursion(reverse);
+            return reverse;
+        }
+        return reverse;
+    }
+
+    private LinkedList<Item> makeList(Node node) {
+        LinkedList<Item> list = new LinkedList<>();
+        while (node != null) {
+            list.add(node.item);
+            node = node.next;
+        }
+        return list;
     }
 
     public Iterator<Item> iterator() {
