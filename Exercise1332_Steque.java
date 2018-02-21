@@ -2,99 +2,61 @@ public class Exercise1332_Steque {
     public static void main(String[] args) {
         Queue<Integer> nonrecurringInt = makeNonrecurringInt(1000);
         Steque<Integer> steque = new Steque<>();
-        int nextInt;
+        // test 1
+        // enqueue then push and then pop through all enqueue
+//        enqueueSteque(3, steque, nonrecurringInt);
+//        pushSteque(3, steque, nonrecurringInt);
+//        popSteque(8, steque);
 
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Enqueue " + nextInt + " :");
-        steque.enqueue(nextInt);
-        printSteque(steque);
+        // test 2
+        // push then enqueue and then pop through all stack
+//        pushSteque(3, steque, nonrecurringInt);
+//        enqueueSteque(3, steque, nonrecurringInt);
+//        popSteque(8, steque);
 
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Enqueue " + nextInt + " :");
-        steque.enqueue(nextInt);
-        printSteque(steque);
-
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Enqueue " + nextInt + " :");
-        steque.enqueue(nextInt);
-        printSteque(steque);
-
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Enqueue " + nextInt + " :");
-        steque.enqueue(nextInt);
-        printSteque(steque);
-
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Push " + nextInt + " :");
-        steque.push(nextInt);
-        printSteque(steque);
-
-        popSteque(steque);
-        popSteque(steque);
-
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Push " + nextInt + " :");
-        steque.push(nextInt);
-        printSteque(steque);
-
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Enqueue " + nextInt + " :");
-        steque.enqueue(nextInt);
-        printSteque(steque);
-
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Push " + nextInt + " :");
-        steque.push(nextInt);
-        printSteque(steque);
-
-        popSteque(steque);
-        popSteque(steque);
-        popSteque(steque);
-        popSteque(steque);
-        popSteque(steque);
-        popSteque(steque);
-        popSteque(steque);
-        popSteque(steque);
-        popSteque(steque);
-
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Push " + nextInt + " :");
-        steque.push(nextInt);
-        printSteque(steque);
-
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Push " + nextInt + " :");
-        steque.push(nextInt);
-        printSteque(steque);
-
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Push " + nextInt + " :");
-        steque.push(nextInt);
-        printSteque(steque);
-
-        nextInt = nonrecurringInt.dequeue();
-        StdOut.println("Push " + nextInt + " :");
-        steque.push(nextInt);
-        printSteque(steque);
-
-        steque.enqueue(nonrecurringInt.dequeue());
-        steque.enqueue(nonrecurringInt.dequeue());
-        steque.enqueue(nonrecurringInt.dequeue());
-        steque.enqueue(nonrecurringInt.dequeue());
-        printSteque(steque);
+        // test 3
+        // enque, push, enque, push
+        enqueueSteque(2, steque, nonrecurringInt);
+        pushSteque(2, steque, nonrecurringInt);
+        enqueueSteque(2, steque, nonrecurringInt);
+        pushSteque(2, steque, nonrecurringInt);
+        popSteque(15, steque);
     }
-    private static void popSteque(Steque<Integer> steque){
-        int poped;
-        if(!steque.isEmpty()) {
-            poped = steque.pop();
-            StdOut.println("Pop the '" + poped + "' :");
+    private static void enqueueSteque(int times, Steque<Integer> steque, Queue<Integer> nonrecurringInt) {
+        int nextInt;
+        for (int i = 0; i < times; i++) {
+            nextInt = nonrecurringInt.dequeue();
+            StdOut.println("Steque after ENQUEUE '" + nextInt + "' :");
+            steque.enqueue(nextInt);
             printSteque(steque);
-        } else {
-            StdOut.println("Steque is empty");
-            StdOut.println();
+        }
+    }
+    private static void pushSteque(int times, Steque<Integer> steque, Queue<Integer> nonrecurringInt) {
+        int nextInt;
+        for (int i = 0; i < times; i++) {
+            nextInt = nonrecurringInt.dequeue();
+            StdOut.println("Steque after PUSH '" + nextInt + "' :");
+            steque.push(nextInt);
+            printSteque(steque);
+        }
+    }
+    private static void popSteque(int times, Steque<Integer> steque){
+        int poped;
+        for (int i = 0; i < times; i++) {
+            if(!steque.isEmpty()) {
+                poped = steque.pop();
+                StdOut.println("Steque after POP the '" + poped + "' :");
+                printSteque(steque);
+            } else {
+                StdOut.println("Steque is empty");
+                StdOut.println();
+            }
         }
     }
     private static void printSteque(Steque<Integer> steque) {
+        if(steque.isEmpty()) {
+            StdOut.println("Steque is empty");
+        }
         for (Integer s: steque) {
             StdOut.println(s);
         }
