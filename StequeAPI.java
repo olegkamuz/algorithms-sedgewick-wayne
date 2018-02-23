@@ -1,5 +1,3 @@
-import java.util.Collection;
-
 public interface StequeAPI<Item> extends Iterable<Item> {
     int size();
     boolean isEmpty();

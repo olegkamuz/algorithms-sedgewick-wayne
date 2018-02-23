@@ -10,12 +10,9 @@ public class Steque<Item> implements StequeAPI<Item> {
     public void push (Item item) {
         Node newNode = new Node();
         newNode.item = item;
-        if (isEmpty()) {
+        if (isEmpty()) { // no, no
             stackEnd = stackStart = newNode;
-        } else if (stackStart == null && queueStart == null) { // no , no
-            newNode.next = stackEnd;
-            stackEnd = stackStart = newNode;
-        } else if (stackStart != null && stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)) { // one, more
+        }  else if (stackStart != null && stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)) { // one, more
             newNode.next = stackEnd;
             stackEnd = newNode;
         } else if (stackStart != null && !stackStart.equals(stackEnd) && queueStart != null && queueStart.equals(queueEnd)) { // more, one
