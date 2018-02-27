@@ -21,9 +21,13 @@ public class Deque<Item> implements DequeAPI<Item> {
         newDoubleNode.item = item;
         if (isEmpty()) {
             left = right = newDoubleNode;
-        } else {
+        } else if (left.equals(right)) {
             left.prev = newDoubleNode;
             newDoubleNode.next = right;
+            left = newDoubleNode;
+        } else {
+            newDoubleNode.next = left;
+            left.prev = newDoubleNode;
             left = newDoubleNode;
         }
         size++;
@@ -34,20 +38,46 @@ public class Deque<Item> implements DequeAPI<Item> {
         newDoubleNode.item = item;
         if (isEmpty()) {
             left = right = newDoubleNode;
+        } else if (left.equals(right)) {
+            right.next = newDoubleNode;
+            newDoubleNode.prev = left;
+            right = newDoubleNode;
         } else {
-            left.prev = newDoubleNode;
-            newDoubleNode.next = right;
-            left = newDoubleNode;
+            right.next = newDoubleNode;
+            newDoubleNode.prev = right;
+            right = newDoubleNode;
         }
         size++;
     }
 
     public Item popLeft () {
-        return left.item;
+        Item item = left.item;
+        if (left.equals(right)){
+            left.item = null;
+            left.next = left.prev = left =  null;
+            right.item = null;
+            right.prev = right.next = right = null;
+            return item;
+        }
+        left.item = null;
+        left = left.next;
+        left.prev = null;
+        return item;
     }
 
     public Item popRight () {
-        return left.item;
+        Item item = right.item;
+        if (left.equals(right)) {
+            left.item = null;
+            left.next = left.prev = left = null;
+            right.item = null;
+            right.prev = right.next = right = null;
+            return item;
+        }
+        right.item = null;
+        right = right.prev;
+        right.next = null;
+        return item;
     }
 
     public boolean isEmpty() {
