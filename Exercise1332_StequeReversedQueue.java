@@ -35,42 +35,42 @@ public class Exercise1332_StequeReversedQueue {
         pushSteque(2, stequeReversedQueue, nonrecurringInt);
         popSteque(15, stequeReversedQueue);
     }
-    private static void enqueueSteque(int times, StequeReversedQueue<Integer> steque, Queue<Integer> nonrecurringInt) {
+    private static void enqueueSteque(int times, StequeReversedQueue<Integer> stequeReversedQueue, Queue<Integer> nonrecurringInt) {
         int nextInt;
         for (int i = 0; i < times; i++) {
             nextInt = nonrecurringInt.dequeue();
             StdOut.println("StequeReversedQueue after ENQUEUE '" + nextInt + "' :");
-            steque.enqueue(nextInt);
-            printSteque(steque);
+            stequeReversedQueue.enqueue(nextInt);
+            printSteque(stequeReversedQueue);
         }
     }
-    private static void pushSteque(int times, StequeReversedQueue<Integer> steque, Queue<Integer> nonrecurringInt) {
+    private static void pushSteque(int times, StequeReversedQueue<Integer> stequeReversedQueue, Queue<Integer> nonrecurringInt) {
         int nextInt;
         for (int i = 0; i < times; i++) {
             nextInt = nonrecurringInt.dequeue();
             StdOut.println("StequeReversedQueue after PUSH '" + nextInt + "' :");
-            steque.push(nextInt);
-            printSteque(steque);
+            stequeReversedQueue.push(nextInt);
+            printSteque(stequeReversedQueue);
         }
     }
-    private static void popSteque(int times, StequeReversedQueue<Integer> steque){
+    private static void popSteque(int times, StequeReversedQueue<Integer> stequeReversedQueue){
         int poped;
         for (int i = 0; i < times; i++) {
-            if(!steque.isEmpty()) {
-                poped = steque.pop();
+            if(!stequeReversedQueue.isEmpty()) {
+                poped = stequeReversedQueue.pop();
                 StdOut.println("StequeReversedQueue after POP the '" + poped + "' :");
-                printSteque(steque);
+                printSteque(stequeReversedQueue);
             } else {
                 StdOut.println("StequeReversedQueue is empty");
                 StdOut.println();
             }
         }
     }
-    private static void printSteque(StequeReversedQueue<Integer> steque) {
-        if(steque.isEmpty()) {
+    private static void printSteque(StequeReversedQueue<Integer> stequeReversedQueue) {
+        if(stequeReversedQueue.isEmpty()) {
             StdOut.println("StequeReversedQueue is empty");
         }
-        for (Integer s: steque) {
+        for (Integer s: stequeReversedQueue) {
             StdOut.println(s);
         }
         StdOut.println();
@@ -83,4 +83,3 @@ public class Exercise1332_StequeReversedQueue {
         return nonrecurring;
     }
 }
-

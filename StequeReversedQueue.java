@@ -10,12 +10,9 @@ public class StequeReversedQueue<Item> implements StequeAPI<Item> {
     public void push (Item item) {
         Node newNode = new Node();
         newNode.item = item;
-        if (isEmpty()) {
+        if (isEmpty()) { // no, no
             stackEnd = stackStart = newNode;
-        } else if (stackStart == null && queueStart == null) { // no , no
-            newNode.next = stackEnd;
-            stackEnd = stackStart = newNode;
-        } else if (stackStart != null && stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)) { // one, more
+        }  else if (stackStart != null && stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)) { // one, more
             newNode.next = stackEnd;
             stackEnd = newNode;
         } else if (stackStart != null && !stackStart.equals(stackEnd) && queueStart != null && queueStart.equals(queueEnd)) { // more, one
@@ -80,8 +77,8 @@ public class StequeReversedQueue<Item> implements StequeAPI<Item> {
             queueEnd = queueStart = newNode;
         } else {
             if (stackEnd == null && queueStart != null && queueStart.equals(queueEnd)) { // no, one
-                queueEnd.next = newNode;
-                queueEnd = newNode;
+                newNode.next = queueStart;
+                queueStart = newNode;
             } else if (stackEnd != null && !stackEnd.equals(stackStart) && queueStart == null) { // more, no
                 stackStart.next = newNode;
                 queueStart = queueEnd = newNode;
@@ -89,17 +86,18 @@ public class StequeReversedQueue<Item> implements StequeAPI<Item> {
                 stackEnd.next = stackStart.next = newNode;
                 queueStart = queueEnd = newNode;
             } else if (stackEnd != null && stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)){ // one, more
-                queueEnd.next = newNode;
-                queueEnd = newNode;
+                newNode.next = queueStart;
+                queueStart = stackStart.next = newNode;
             } else if (stackStart != null && !stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)) { // more, more
-                queueEnd.next = newNode;
-                queueEnd = newNode;
+                newNode.next = queueStart;
+                queueStart = stackStart.next = newNode;
             } else if (stackStart != null && !stackEnd.equals(stackStart) && queueStart != null && queueStart.equals(queueEnd)) { // more, one
-                queueEnd.next = queueStart.next = newNode;
-                queueEnd = newNode;
+                newNode.next = queueStart;
+                queueStart = newNode;
+                stackStart.next = newNode;
             } else if (stackStart == null && queueStart != null && !queueStart.equals(queueEnd)) { // no, more
-                queueEnd.next = newNode;
-                queueEnd = newNode;
+                newNode.next = queueStart;
+                queueStart = newNode;
             }
         }
         size++;
@@ -136,4 +134,3 @@ public class StequeReversedQueue<Item> implements StequeAPI<Item> {
         public void remove() {}
     }
 }
-

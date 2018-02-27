@@ -10,9 +10,12 @@ public class Steque<Item> implements StequeAPI<Item> {
     public void push (Item item) {
         Node newNode = new Node();
         newNode.item = item;
-        if (isEmpty()) { // no, no
+        if (isEmpty()) {
             stackEnd = stackStart = newNode;
-        }  else if (stackStart != null && stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)) { // one, more
+        } else if (stackStart == null && queueStart == null) { // no , no
+            newNode.next = stackEnd;
+            stackEnd = stackStart = newNode;
+        } else if (stackStart != null && stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)) { // one, more
             newNode.next = stackEnd;
             stackEnd = newNode;
         } else if (stackStart != null && !stackStart.equals(stackEnd) && queueStart != null && queueStart.equals(queueEnd)) { // more, one
@@ -77,8 +80,8 @@ public class Steque<Item> implements StequeAPI<Item> {
             queueEnd = queueStart = newNode;
         } else {
             if (stackEnd == null && queueStart != null && queueStart.equals(queueEnd)) { // no, one
-                newNode.next = queueStart;
-                queueStart = newNode;
+                queueEnd.next = newNode;
+                queueEnd = newNode;
             } else if (stackEnd != null && !stackEnd.equals(stackStart) && queueStart == null) { // more, no
                 stackStart.next = newNode;
                 queueStart = queueEnd = newNode;
@@ -86,18 +89,17 @@ public class Steque<Item> implements StequeAPI<Item> {
                 stackEnd.next = stackStart.next = newNode;
                 queueStart = queueEnd = newNode;
             } else if (stackEnd != null && stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)){ // one, more
-                newNode.next = queueStart;
-                queueStart = stackStart.next = newNode;
+                queueEnd.next = newNode;
+                queueEnd = newNode;
             } else if (stackStart != null && !stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)) { // more, more
-                newNode.next = queueStart;
-                queueStart = stackStart.next = newNode;
+                queueEnd.next = newNode;
+                queueEnd = newNode;
             } else if (stackStart != null && !stackEnd.equals(stackStart) && queueStart != null && queueStart.equals(queueEnd)) { // more, one
-                newNode.next = queueStart;
-                queueStart = newNode;
-                stackStart.next = newNode;
+                queueEnd.next = queueStart.next = newNode;
+                queueEnd = newNode;
             } else if (stackStart == null && queueStart != null && !queueStart.equals(queueEnd)) { // no, more
-                newNode.next = queueStart;
-                queueStart = newNode;
+                queueEnd.next = newNode;
+                queueEnd = newNode;
             }
         }
         size++;
@@ -134,3 +136,4 @@ public class Steque<Item> implements StequeAPI<Item> {
         public void remove() {}
     }
 }
+
