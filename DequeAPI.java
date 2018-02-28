@@ -1,5 +1,7 @@
 public interface DequeAPI<Item> extends Iterable<Item> {
-    Deque Deque();
+    static Deque Deque() {
+        return new Deque();
+    }
     boolean isEmpty();
     int size();
     void pushLeft(Item item);

@@ -13,7 +13,7 @@ public class Exercise1332_StequeReversedQueue {
         test3(stequeReversedQueue, nonrecurringInt);
     }
 
-    private static void test1(StequeReversedQueue stequeReversedQueue, NonrecurringInt nonrecurringInt) {
+    private static void test1(StequeReversedQueue<Integer> stequeReversedQueue, NonrecurringInt nonrecurringInt) {
         StdOut.println("test 1: ");
         StdOut.println();
         enqueueSteque(3, stequeReversedQueue, nonrecurringInt);
@@ -21,7 +21,7 @@ public class Exercise1332_StequeReversedQueue {
         popSteque(8, stequeReversedQueue);
     }
 
-    private static void test2(StequeReversedQueue stequeReversedQueue, NonrecurringInt nonrecurringInt) {
+    private static void test2(StequeReversedQueue<Integer> stequeReversedQueue, NonrecurringInt nonrecurringInt) {
         StdOut.println("test 2: ");
         StdOut.println();
         pushSteque(3, stequeReversedQueue, nonrecurringInt);
@@ -29,7 +29,7 @@ public class Exercise1332_StequeReversedQueue {
         popSteque(8, stequeReversedQueue);
     }
 
-    private static void test3(StequeReversedQueue stequeReversedQueue, NonrecurringInt nonrecurringInt) {
+    private static void test3(StequeReversedQueue<Integer> stequeReversedQueue, NonrecurringInt nonrecurringInt) {
         StdOut.println("test 3: ");
         StdOut.println();
         enqueueSteque(2, stequeReversedQueue, nonrecurringInt);

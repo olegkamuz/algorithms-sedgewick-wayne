@@ -2,17 +2,12 @@ import java.util.Iterator;
 
 public class Deque<Item> implements DequeAPI<Item> {
 
-    private DoubleNode stackEndLeft;
-    private DoubleNode stackStartLeft;
-    private DoubleNode stackEndRight;
-    private DoubleNode stackStartRight;
-
     private DoubleNode left;
     private DoubleNode right;
 
     private int size;
 
-    public Deque<Item> Deque() {
+    public static <Item> Deque<Item> Deque() {
        return new Deque<>();
     }
 

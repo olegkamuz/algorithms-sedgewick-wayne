@@ -1,7 +1,7 @@
 public class Exercise1333_Deque {
     public static void main(String[] args) {
         NonrecurringInt nonrecurringInt = new NonrecurringInt(1000);
-        Deque<Integer> deque = new Deque<>();
+        Deque<Integer> deque = Deque.Deque();
 
         // push right, push left, pop left all
         test1(deque, nonrecurringInt);
