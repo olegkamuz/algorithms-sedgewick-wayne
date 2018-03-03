@@ -2,15 +2,16 @@ import java.util.Iterator;
 
 public class RandomBag<Item> implements RandomBagAPI<Item> {
     private Node first;
-    private int size;
     private Node backupNode;
+    private int size;
 
     public static <Item> RandomBag<Item> RandomBag() {
         return new RandomBag<>();
     }
 
-    public void backup() {
-        first = backupNode;
+    public void backup(RandomBag<Item> backupRestore) {
+        first = backupRestore.first;
+        size = backupRestore.size;
     }
 
     private class Node {
@@ -22,17 +23,11 @@ public class RandomBag<Item> implements RandomBagAPI<Item> {
             this.next = next;
         }
 
-        Node(Node node) {
-            this.item = node.item;
-            this.next = node.next;
-        }
     }
 
     public void add(Item item) {
-        Node newNode = new Node(item, first);
-        Node backUpNode = new Node(newNode);
-        first = newNode;
-        this.backupNode = backUpNode;
+        first = new Node(item, first);
+        backupNode = new Node(item, backupNode);
         size++;
     }
 
@@ -53,14 +48,9 @@ public class RandomBag<Item> implements RandomBagAPI<Item> {
 
         public boolean hasNext() {
             return !isEmpty() && current != null;
-//            return current != null;
         }
 
         public Item next() {
-//            Item temp = current.item;
-//            current = current.next;
-//            return temp;
-
             int times = StdRandom.uniform(size);
             Node preCurrent = null;
             for (int i = 0; i < times; i++) {
@@ -72,16 +62,19 @@ public class RandomBag<Item> implements RandomBagAPI<Item> {
                 preCurrent.next = current.next;
                 current.item = null;
                 current.next = null;
+                current = null;
                 current = first;
             } else if (current.next != null) {
                 Node tempCurrent = current.next;
                 current.item = null;
                 current.next = null;
-                current = tempCurrent;
+                current = null;
+                current = first = tempCurrent;
             } else if (preCurrent != null) {
                 preCurrent.next = null;
                 current.item = null;
                 current.next = null;
+                current = null;
             }
             size--;
             return temp;
