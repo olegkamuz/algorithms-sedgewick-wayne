@@ -21,14 +21,10 @@ public class Exercise1334_RandomBag {
     }
 
     private static void printRandomBag(RandomBag<Integer> randomBag) {
-        Iterator<Integer> iterator = randomBag.iterator();
-        RandomBag<Integer> backupRestore = new RandomBag<>();
-        while (iterator.hasNext()) {
-            Integer next = iterator.next();
-            StdOut.print(next + " ");
-            backupRestore.add(next);
+        RandomBag<Integer> copy = randomBag.clone();
+        for (Integer i : copy) {
+            StdOut.print(i + " ");
         }
-        randomBag.backup(backupRestore);
         StdOut.println();
     }
 }

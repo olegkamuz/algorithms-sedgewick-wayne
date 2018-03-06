@@ -2,32 +2,30 @@ import java.util.Iterator;
 
 public class RandomBag<Item> implements RandomBagAPI<Item> {
     private Node first;
-    private Node backupNode;
     private int size;
 
     public static <Item> RandomBag<Item> RandomBag() {
         return new RandomBag<>();
     }
-
-    public void backup(RandomBag<Item> backupRestore) {
-        first = backupRestore.first;
-        size = backupRestore.size;
+    public RandomBag<Item> clone() {
+        RandomBag<Item> clone = RandomBag.RandomBag();
+        Node current = first;
+        while (current != null) {
+            clone.add(current.item);
+            current = current.next;
+        }
+        return clone;
     }
-
     private class Node {
         Item item;
         Node next;
-
-        Node(Item item, Node next) {
-            this.item = item;
-            this.next = next;
-        }
-
     }
 
     public void add(Item item) {
-        first = new Node(item, first);
-        backupNode = new Node(item, backupNode);
+        Node newNode = new Node();
+        newNode.item = item;
+        newNode.next = first;
+        first = newNode;
         size++;
     }
 
@@ -51,30 +49,36 @@ public class RandomBag<Item> implements RandomBagAPI<Item> {
         }
 
         public Item next() {
-            int times = StdRandom.uniform(size);
+            int key = StdRandom.uniform(size + 1);
             Node preCurrent = null;
-            for (int i = 0; i < times; i++) {
-                if (times > 1 && i == times - 2) preCurrent = current;
-                if (i + 1 < times) current = current.next;
+            for (int i = 0; i < key; i++) {
+                if (key > 1 && i == key - 2) preCurrent = current;
+                if (i + 1 < key) current = current.next;
             }
             Item temp = current.item;
-            if (current.next != null && preCurrent != null) {
+            if (current.next != null && preCurrent != null) { // in the middle
                 preCurrent.next = current.next;
                 current.item = null;
                 current.next = null;
                 current = null;
                 current = first;
-            } else if (current.next != null) {
+            } else if (current.next != null) { // at the start
                 Node tempCurrent = current.next;
                 current.item = null;
                 current.next = null;
                 current = null;
                 current = first = tempCurrent;
-            } else if (preCurrent != null) {
+            } else if (preCurrent != null) { // at the end
                 preCurrent.next = null;
                 current.item = null;
                 current.next = null;
                 current = null;
+                current = first;
+            } else {
+                current.item = null;
+                current.next = null;
+                current = null;
+                current = first;
             }
             size--;
             return temp;
