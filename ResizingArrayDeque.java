@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.Iterator;
 
 public class ResizingArrayDeque<Item> implements DequeAPI {
@@ -43,10 +42,6 @@ public class ResizingArrayDeque<Item> implements DequeAPI {
             temp[i] = arr[i];
         }
         arr = temp;
-    }
-
-    public int arraySize() {
-        return arr.length;
     }
 
     public void pushLeft(Item item) {
