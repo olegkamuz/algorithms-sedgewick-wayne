@@ -80,14 +80,6 @@ public class RandomQueueRandomIterator<Item> implements RandomQueueAPI<Item> {
         return item;
     }
 
-    public RandomQueueRandomIterator<Item> clone() {
-        RandomQueueRandomIterator<Item> copy = RandomQueueRandomIterator.RandomQueueRandomIterator();
-        for (int i = 0; i < arr.length; i++) {
-            copy.enqueue(arr[i]);
-        }
-        return copy;
-    }
-
     public Iterator<Item> iterator() {
         return new ListIterator();
     }
