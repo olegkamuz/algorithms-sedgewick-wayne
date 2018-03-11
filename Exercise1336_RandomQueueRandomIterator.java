@@ -1,4 +1,5 @@
 public class Exercise1336_RandomQueueRandomIterator {
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         MixedDeck mixedDeck = MixedDeck.MixedDeck();
         RandomQueueRandomIterator<Card> randomQueue = RandomQueueRandomIterator.RandomQueueRandomIterator();
