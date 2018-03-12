@@ -1,7 +1,6 @@
 import java.util.Iterator;
 
-//public class Deque<Item> implements DequeAPI<Item> {
-    public class DequeSingleLinkedList<Item> {
+public class DequeSingleLinkedList<Item> {
 
     private Node stackEndLeft;
     private Node stackStartLeft;
@@ -66,44 +65,7 @@ import java.util.Iterator;
         }
         size++;
     }
-//    public Item popLeft () {
-//        if (isEmpty()) return null; // no, no
-//        Item tempItem;
-//        Node tempNext;
-//        if (stackEnd != null) {
-//            tempItem = stackEnd.item;
-//            tempNext = stackEnd.next;
-//        } else {
-//            tempItem = queueStart.item;
-//            tempNext = queueStart.next;
-//        }
-//        if (stackStart != null && stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)) { // one, more
-//            stackEnd.item = stackStart.item = null;
-//            stackEnd.next = stackStart.next = null;
-//            stackEnd = stackStart = null;
-//        } else if (stackStart != null && !stackStart.equals(stackEnd) && queueStart != null && !queueStart.equals(queueEnd)) { // more, more
-//            stackEnd.item = null;
-//            stackEnd.next = null;
-//            stackEnd = null;
-//            stackEnd = tempNext;
-//        } else if (stackStart != null && !stackStart.equals(stackEnd) && queueStart != null && queueStart.equals(queueEnd)) { // more, one
-//            stackEnd.item = null;
-//            stackEnd.next = null;
-//            stackEnd = null;
-//            stackEnd = tempNext;
-//        } else if (stackStart == null && queueStart != null && !queueStart.equals(queueEnd)) { // no, more
-//            queueStart.item = null;
-//            queueStart.next = null;
-//            queueStart = tempNext;
-//        } else if (stackStart == null && queueStart != null && queueStart.equals(queueEnd)) { // no, one
-//            queueStart.item = queueEnd.item = null;
-//            queueStart.next = null;
-//            queueStart = queueEnd = null;
-//        }
-//        size--;
-//        return tempItem;
-//    }
-//    public Item popRight () {}
+
 
     public boolean isEmpty() {
         return stackStartLeft == null && stackStartRight == null;
@@ -112,7 +74,6 @@ import java.util.Iterator;
     private class Node {
         Item item;
         Node next;
-        Node prev;
     }
 
     public Iterator<Item> iterator() {

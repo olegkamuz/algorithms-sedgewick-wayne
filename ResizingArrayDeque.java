@@ -1,16 +1,17 @@
 import java.util.Iterator;
 
-public class ResizingArrayDeque<Item> implements DequeAPI {
+public class ResizingArrayDeque<Item> implements Deque<Item> {
     private Item[] arr;
     private int size;
 
     @SuppressWarnings("unchecked")
-    private ResizingArrayDeque(int max) {
-        arr = (Item[]) new Object[max];
+    private ResizingArrayDeque() {
+        arr = (Item[]) new Object[1];
     }
 
-    public static <Item> ResizingArrayDeque<Item> Deque(Item item, int max) {
-        return new ResizingArrayDeque<>(max);
+    @SuppressWarnings("unchecked")
+    public static <Item> Deque<Item> Deque() {
+        return new ResizingArrayDeque<>();
     }
 
     public boolean isEmpty() {
