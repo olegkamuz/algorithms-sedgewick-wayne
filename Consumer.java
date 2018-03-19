@@ -7,4 +7,10 @@ public class Consumer {
     public void setElement (Integer integer) {
         arr[count++] = integer;
     }
+    public int getArrSize() {
+        return arr.length;
+    }
+    public Integer getElement(int i) {
+       return arr[i];
+    }
 }

@@ -2,65 +2,52 @@ import java.util.Iterator;
 
 public class Exercise1339_RingBuffer {
     public static void main(String[] args) throws InterruptedException {
-        asyncTimerStart();
 
-        RingBufferArray<Integer> ringBufferArray = new RingBufferArray<>(10);
+        RingBufferArray<Integer> ringBufferArray = new RingBufferArray<Integer>(10);
         NonrecurringInt nonrecurringInt = new NonrecurringInt(100);
-        Iterator<Integer> iterator = ringBufferArray.iterator();
-        Consumer consumer = new Consumer(10);
-        asyncBufferStart(ringBufferArray, iterator, consumer);
 
+        Consumer consumer = new Consumer(20);
+        asyncBufferStart(ringBufferArray, consumer);
 
-        Thread.sleep(3000);
-        Producer producer = new Producer(10, nonrecurringInt);
-        StdOut.println("Producer initialized");
-        insert(5, producer, ringBufferArray);
+        Producer producer = new Producer(20, nonrecurringInt);
+        new Draw(producer, ringBufferArray, consumer, 300);
+        Thread.sleep(500);
+        insert(20, producer, ringBufferArray);
 
-        Thread.sleep(3000);
-        ringBufferArray.stop = true;
     }
 
     private static void insert(int times, Producer producer, RingBuffer<Integer> ringBufferArray) throws InterruptedException {
-        for (int i = 0; i < times; i++) {
+        for (int i = 0; i < times;) {
+            StdOut.println(!ringBufferArray.isEmpty());
             if (!ringBufferArray.isFull()) {
                 int insert = producer.getInt();
                 ringBufferArray.insert(insert);
-                StdOut.println("'" + insert + "' inserted");
+                Thread.sleep(500);
+                i++;
             }
-            Thread.sleep(100);
         }
     }
 
-    private static void bufferStart(RingBuffer<Integer> ringBufferArray, Iterator<Integer> iterator, Consumer consumer) throws InterruptedException {
-        StdOut.println("Buffer started");
+    private static void bufferStart(RingBuffer<Integer> ringBufferArray, Consumer consumer) throws InterruptedException {
+        Iterator<Integer> iterator = ringBufferArray.iterator();
         while (true) {
-            Thread.sleep(10);
+            Thread.sleep(500);
             if (!ringBufferArray.isEmpty()) {
                 Integer next = iterator.next();
                 if (next != null) {
                     consumer.setElement(next);
-                    StdOut.println("Consumer get '" + next + "' element");
                 }
             }
             if (ringBufferArray.stop) {
-                StdOut.println("Buffer stopped");
                 break;
             }
         }
     }
 
-    private static void timerStart() throws InterruptedException {
-        int timer = 1;
-        while (timer < 5) {
-            Thread.sleep(1000);
-            StdOut.println("Timer: " + timer++ + " second(s)");
-        }
-    }
-
-    private static void asyncBufferStart(RingBuffer<Integer> ringBufferArray, Iterator<Integer> iterator, Consumer consumer) {
+    private static void asyncBufferStart(RingBuffer<Integer> ringBufferArray, Consumer consumer) {
         Runnable task = () -> {
             try {
-                bufferStart(ringBufferArray, iterator, consumer);
+                bufferStart(ringBufferArray, consumer);
             } catch (Exception ex) {
                 StdOut.println(ex);
             }
@@ -68,14 +55,15 @@ public class Exercise1339_RingBuffer {
         new Thread(task, "asyncBufferThread").start();
     }
 
-    private static void asyncTimerStart() {
-        Runnable taskTimer = () -> {
+    private static void asyncInsertStart(RingBuffer<Integer> ringBufferArray, Consumer consumer) {
+        Runnable task = () -> {
             try {
-                timerStart();
+                bufferStart(ringBufferArray, consumer);
             } catch (Exception ex) {
                 StdOut.println(ex);
             }
         };
-        new Thread(taskTimer, "asyncTimerThread").start();
+        new Thread(task, "asyncBufferThread").start();
     }
 }
+
