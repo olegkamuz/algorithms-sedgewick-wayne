@@ -39,28 +39,28 @@ public class MoveToFront<Item> implements MoveToFrontAPI<Item> {
         Node temp;
         while (current != null) {
             if (current.next != null) {
-                if (current.next.item == item && current.next.next != null) {
+                if (current.next.item == item && current.next.next != null) { // remove between elements
                     temp = current.next.next;
-                    current.next.next = null;
                     current.next.item = null;
                     current.next = null;
                     current.next = temp;
                 }
-                if (current.next.item == item) {
+                if (current.next.item == item) { // remove last
                     current.next.item = null;
                     current.next = null;
                 }
-                current = current.next;
             }
             if (current.item == item && current.next != null) { // first element duplicated
                 first = first.next;
                 current.item = null;
                 current.next = null;
                 current = null;
-            } else { // single element list
+            } else if (current.item == item) { // single element list
                 first.item = null;
                 first = null;
                 current = null;
+            } else {
+                current = current.next;
             }
         }
     }
