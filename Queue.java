@@ -10,6 +10,16 @@ public class Queue<Item> implements Iterable<Item> {
         Node next;
     }
 
+    public Queue () {
+
+    }
+
+    public Queue(Queue<Item> q) {
+       for (Item i: q) {
+           enqueue(i);
+       }
+    }
+
     public boolean isEmpty() {
         return first == null;
     }
