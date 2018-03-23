@@ -10,6 +10,19 @@ public class Stack<Item> implements Iterable<Item> {
         Node next;
     }
 
+    public Stack() {
+    }
+
+    public Stack(Stack<Item> s) {
+        Stack<Item> temp = new Stack<>();
+        for (Item i : s) {
+            temp.push(i);
+        }
+        for (Item item : temp) {
+            push(item);
+        }
+    }
+
     public boolean isEmpty() {
         return first == null;
     }
@@ -27,7 +40,7 @@ public class Stack<Item> implements Iterable<Item> {
     }
 
     public Item pop() {
-        if (isEmpty()){
+        if (isEmpty()) {
             throw new NoSuchElementException();
         }
         Item item = first.item;
