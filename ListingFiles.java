@@ -16,8 +16,9 @@ public class ListingFiles {
         int indent = 0;
         if (file.isDirectory()) {
             add(file, indent);
-            if(file.listFiles() != null) {
-                for(File f: file.listFiles())
+            File[] files = file.listFiles();
+            if(files != null) {
+                for(File f: files)
                     check(f, indent);
             }
         } else add(file, indent);
