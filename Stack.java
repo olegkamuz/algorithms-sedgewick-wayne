@@ -49,6 +49,15 @@ public class Stack<Item> implements Iterable<Item> {
         return item;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Item i: this) {
+            stringBuilder.append(i + " ");
+        }
+        return stringBuilder.toString();
+    }
+
     public Iterator<Item> iterator() {
         return new ListIterator();
     }
