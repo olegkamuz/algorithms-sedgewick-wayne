@@ -49,6 +49,13 @@ public class Stack<Item> implements Iterable<Item> {
         return item;
     }
 
+    public Item peek() {
+        if (isEmpty()){
+            throw new NoSuchElementException();
+        }
+        return this.first.item;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
