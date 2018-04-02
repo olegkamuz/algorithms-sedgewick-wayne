@@ -1,0 +1,1 @@
+When push "c" command took place, a and b was on stack(according to permutation sequence), so they goes in order, formed by the rule: smaller item pushed earlier(if pushed items are in sorted, ascend order), so "a" can't be pop earlier than "b".
