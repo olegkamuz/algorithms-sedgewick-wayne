@@ -20,6 +20,15 @@ public class Queue<Item> implements Iterable<Item> {
        }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Item item: this) {
+            stringBuilder.append(item + " ");
+        }
+        return stringBuilder.toString();
+    }
+
     public boolean isEmpty() {
         return first == null;
     }

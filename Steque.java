@@ -7,6 +7,15 @@ public class Steque<Item> implements StequeAPI<Item> {
     private Node stackStart;
     private int size;
 
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Item item: this) {
+            stringBuilder.append(item + " ");
+        }
+        return stringBuilder.toString();
+    }
+
     public void push (Item item) {
         Node newNode = new Node();
         newNode.item = item;
