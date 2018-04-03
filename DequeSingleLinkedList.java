@@ -8,11 +8,11 @@ public class DequeSingleLinkedList<Item> {
     private Node stackStartRight;
     private int size;
 
-    public void pushLeft (Item item) {
+    public void pushLeft(Item item) {
         Node newNode = new Node();
         newNode.item = item;
         if (isEmpty()) {
-            stackStartLeft =  stackEndLeft = newNode;
+            stackStartLeft = stackEndLeft = newNode;
         } else if (stackStartLeft == null && stackStartRight != null && stackStartRight.equals(stackEndRight)) { // no , one
             stackStartRight = stackEndRight = newNode;
         } else if (stackStartLeft != null && stackStartLeft.equals(stackEndLeft) && stackStartRight != null && !stackStartRight.equals(stackEndRight)) { // one, more
@@ -36,7 +36,8 @@ public class DequeSingleLinkedList<Item> {
         }
         size++;
     }
-    public void pushRight (Item item) {
+
+    public void pushRight(Item item) {
         Node newNode = new Node();
         newNode.item = item;
         if (isEmpty()) {
@@ -70,7 +71,11 @@ public class DequeSingleLinkedList<Item> {
     public boolean isEmpty() {
         return stackStartLeft == null && stackStartRight == null;
     }
-    public int size() {return size;}
+
+    public int size() {
+        return size;
+    }
+
     private class Node {
         Item item;
         Node next;
@@ -79,6 +84,7 @@ public class DequeSingleLinkedList<Item> {
     public Iterator<Item> iterator() {
         return new ListIterator();
     }
+
     private class ListIterator implements Iterator<Item> {
         private Node current;
 
@@ -90,12 +96,15 @@ public class DequeSingleLinkedList<Item> {
         public boolean hasNext() {
             return current != null && size != 0;
         }
+
         public Item next() {
             Item item = current.item;
             current = current.next;
             return item;
         }
-        public void remove() {}
+
+        public void remove() {
+        }
     }
 }
 
