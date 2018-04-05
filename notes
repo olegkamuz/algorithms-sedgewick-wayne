@@ -1,0 +1,34 @@
+enqueue
+- always push to tail or tempTail
+- recopy if no recopy is taking place and tail gaiter than head
+startRecopy
+- flag of recopy in busy
+- reset head iterators
+performRecopySteps
+- if first pass not done do one more pass else do one pass second pass
+- if after one more pass second pass recopy is still going do one more pass second pass
+- if after one more pass first pass it is still going do one more pass
+- if after one more pass first pass it is done do one pass second pass
+(looks like it is four iteration plus one on pushing and we have max five iteration per enqueue)
+performRecopyFirstPassStep
+- if there is some in tail do one push to reverseTail from its pop
+- if head iterator not empty push one time to reverseHead
+- if tail is empty and headIterator is not first pass is done(mark flag)
+(can be three iterations here)
+performRecopySecondPassStep
+- if reverseHead greater than deleted when coping, push to reversTail from reverseHead
+- if reverseHead equal to deleted:
+    - head becomes equal reverseTail(revTail erased afterwards)
+    - temp becomes tempTail(tempTail erased afterwards)
+    - reverseHead erased
+    - deleted nulled
+    - set recopy and recopy first pass not going(false)
+
+
+Iterator
+- if recopying, iterate tail to reverseTailCopy and make headIterator
+-
+
+
+dequeue
+- poping head until its become smaller than tail, then start recopy and while it works get items from head iterator(counting items dequed while recopy running, not to take them to head in the end of recopying)

@@ -1,0 +1,41 @@
+(define a (cons 'b empty))
+> a
+(cons 'b empty)
+> (first a)
+'b
+> (rest a)
+empty
+------------------------------------
+(define students (cons 'Mike (cons 'Bob empty)))
+> students
+(cons 'Mike (cons 'Bob empty))
+> (first students)
+'Mike
+> (rest students)
+(cons 'Bob empty)
+> (first (rest students))
+'Bob
+> (empty? students)
+false
+-----------------------------------
+(define classes (cons (cons 'A empty) (cons 'B empty))
+> classes
+(cons (cons 'A empty) (cons 'B empty))
+> (first classes)
+(cons 'A empty)
+> (first (first classes))
+'A
+-----------------------------------
+(define a (list 'A 'B 'C))
+> a
+(list 'A 'B 'C)
+> (first a)
+'A
+> (second a)
+'B
+> (third a)
+'C
+> (append a (list 'a))
+(list 'A 'B 'C 'a))
+>  (cons a (cons 'a empty)
+(list (list 'A 'B 'C) 'a)

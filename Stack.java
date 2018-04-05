@@ -59,7 +59,11 @@ public class Stack<Item> implements Iterable<Item> {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+//        int counter = 0;
         for (Item i: this) {
+//            counter++;
+//            if (counter == N) stringBuilder.append(i);
+//            else stringBuilder.append(i + " ");
             stringBuilder.append(i + " ");
         }
         return stringBuilder.toString();
