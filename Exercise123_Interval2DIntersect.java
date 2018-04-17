@@ -1,4 +1,7 @@
 import java.awt.Color;
+
+// Visualisation to this exercise: https://github.com/olegkamuz/algorithms-sedgewick-wayne/wiki/Exercise123_Intervals2DIntersections-Clarification
+
 public class Exercise123_Interval2DIntersect {
     public static void main(String[] args){
         int N = 13;
