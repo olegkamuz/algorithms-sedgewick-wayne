@@ -7,6 +7,8 @@ Just sharing my work on the exercises so far.
 
 Work in progress, updated when new exercise done.
 
+<a href="url"><img src="mainIdeaAlgirithm.jpg" align="right" height="280" width="200" ></a>
+
 
 
 
