@@ -12,18 +12,29 @@ public class TextEditorBuffer<Item> {
     }
 
     public char delete() {
-        return (char) leftStack.pop();
+        char c =(char) leftStack.pop();
+        if (leftStack.isEmpty()) leftStack.push(rightStack.pop());
+        return c;
     }
 
     public void left(int k) {
-        rightStack.push(leftStack.pop());
+        for (int i = 0; i < k; i++) {
+            rightStack.push(leftStack.pop());
+        }
     }
 
     public void right(int k) {
-        leftStack.push(rightStack.pop());
+        for (int i = 0; i < k; i++) {
+            leftStack.push(rightStack.pop());
+        }
     }
 
     public int size() {
         return size;
+    }
+
+    @Override
+    public String toString() {
+        return leftStack.toString();
     }
 }
