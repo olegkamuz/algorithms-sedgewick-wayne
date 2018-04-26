@@ -1,0 +1,13 @@
+Here is famous binomial coefficient:
+(nice explanation of it you can find here - https://www.youtube.com/watch?v=p8vIcmr_Pqo&t=196s and remember about permutation and combination difference explained here - https://betterexplained.com/articles/easy-permutations-and-combinations/ )
+
+n!/(k!(n - k)!)
+
+Let's consider this part of equation N(N - 1)(N - 2) -
+here we have factorial of N without (N-3)!
+can be written as:
+N! = (N(N - 1)(N - 2))/(N - 3)! and from binomial coefficient N(N - 1)(N - 2) it is a number of all possible permutation of N by three numbers. So to get just combinations(cause permutation like 3+2-5 and 3-5+2 don't have any difference in characterizing given input and all of them gives us zero) we have to divide to 3!(three cause we need combination from three input numbers and all permutation in such combination exactly 3!) to get rid of unwanted permutation from all of permutation, so we have:
+N! / (3!(N - 3)!) or:
+(N(N - 1)(N - 2)) / 3! or:
+
+(N(N - 1)(N - 2))/6 the equation we have to proof.
