@@ -1,45 +1,58 @@
 // todo: experimental data to file CACHE
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Exercise143_DoublingTestPlot {
-    public static void main(String[] args) throws InterruptedException {
-//        1000.0 0.288 2000.0 2.099 4000.0 15.591 8000.0 145.6 16000 166.622
-//        1000.0 0.044 2000.0 0.345 4000.0 15.741 8000.0 126.614 16000 166.622
-        In in = new In("doublingTestData"); // CACHE
-        double[] doubles = in.readAllDoubles(); // CACHE
+    public static void main(String[] args) throws InterruptedException, IOException {
+        File file = new File("C:\\Users\\newba\\IdeaProjects\\algorithms-sedgewick-wayne\\src\\cache.txt");
+        if (file.createNewFile()){
+            System.out.println("cache file is created");
+        }
 
-        double[][] NAndTime = new double[10][2]; // CACHE
-        double max; // real
+        In in = new In("cache.txt");
+        double[] doubles = in.readAllDoubles();
+
+        double[][] NAndTime = new double[10][2];
+        double max;
 
         setDrawSettings();
         int NAndTimeSize = 0;
-        int countDoubles = 0;// CACHE
-        for (int i = 0; i < doubles.length / 2; i++) {// CACHE
+        int countDoubles = 0;
+
+
+        for (int i = 0; i < doubles.length / 2; i++) {
+            NAndTime[i][0] = doubles[countDoubles++];
+            NAndTime[i][1] = doubles[countDoubles++];
+        }
+
+        // todo: make i integer
+        FileWriter writer = new FileWriter(file);
+        for (double i =  0.0; i <= 3.0; i++) {
+            double N = 1000.0 * Math.pow(2, i);
+            if (NAndTime[(int) i][0] == N) {
+                max = NAndTime[(int) i][1];
+                StdOut.println(N + " " + NAndTime[(int) i][1]);
+                NAndTimeSize++;
+            } else {
+                double time = DoublingTest.timeTrial((int) N);
+                StdOut.println(N + " " + time);// real
+                max = time; // real
+                NAndTime[(int) i][0] = N;
+                NAndTime[(int) i][1] = time;
+                writer.append(NAndTime[(int) i][0] + " " + NAndTime[(int) i][1] + " ");
+                NAndTimeSize++;
+            }
             StdDraw.clear();
-            NAndTime[i][0] = doubles[countDoubles++];// CACHE
-            NAndTime[i][1] = doubles[countDoubles++];// CACHE
-            NAndTimeSize++;
-            max = NAndTime[i][1]; // raw guess // CACHE // Animated mode
             drawNormalPlot(NAndTime, NAndTimeSize, max);
             drawLogPlot(NAndTime, NAndTimeSize, max);
             drawNormalCurve(NAndTime, NAndTimeSize, max);
             drawLogCurve(NAndTime, NAndTimeSize, max);
             Thread.sleep(1000);
-        }// CACHE
-
-//        for (double i =  0.0; i <= 10.0; i++) {// real
-//            double N = 1000.0 * Math.pow(2, i);// real
-//            double time = DoublingTest.timeTrial((int) N);// real
-//            StdDraw.clear();
-//            StdOut.println(N + " " + time);// real
-//            max = time; // real
-//            NAndTime[(int) i][0] = N;// real
-//            NAndTime[(int) i][1] = time;// real
-//            NAndTimeSize++;
-//            drawLogPlot(NAndTime, NAndTimeSize, max);
-//            drawLogCurve(NAndTime, NAndTimeSize, max);
-//        }// real
+        }
+        writer.close();
 
     }
 
@@ -126,14 +139,11 @@ public class Exercise143_DoublingTestPlot {
             StdDraw.setPenColor(StdDraw.RED);
             StdDraw.setPenRadius(StdDraw.getPenRadius() + 0.009);
             // Print point coordinates
-//            StdOut.println((Math.log(NAndTime[i][0] * 10) * 0.1) + 0.7 + " " +  Math.log(NAndTime[i][1] * 10) / Math.log(max * 10));
             StdDraw.point((Math.log(NAndTime[i][0] * 100) * 0.1) + 0.7, Math.log(NAndTime[i][1] * 100) / Math.log(max * 100));
-//            StdDraw.point((Math.log(NAndTime[i + 1][0] * 10) * 0.1) + 0.7, Math.log(NAndTime[i + 1][1] * 10) / Math.log(max * 10));
             StdDraw.setPenColor(StdDraw.BLACK);
             StdDraw.setPenRadius(StdDraw.getPenRadius() - 0.009);
         }
         for (int i = 0; i < NAndTimeSize - 1; i++) {
-            StdOut.println(((Math.log(NAndTime[i][0] * 10) * 0.1) + 0.7) + " " + (Math.log(NAndTime[i][1] * 10) / Math.log(max * 10)) + " " + ((Math.log(NAndTime[i + 1][0] * 10) * 0.1) + 0.7) + " " + (Math.log(NAndTime[i + 1][1] * 10) / (Math.log(max * 10))));
             StdDraw.line((Math.log(NAndTime[i][0] * 100) * 0.1) + 0.7, (Math.log(NAndTime[i][1] * 100) / Math.log(max * 100)), (Math.log(NAndTime[i + 1][0] * 100) * 0.1) + 0.7, (Math.log(NAndTime[i + 1][1] * 100) / (Math.log(max * 100))));
         }
     }
