@@ -1,0 +1,10 @@
+statement block | time in seconds | frequency           | total time
+D                       t0          x(depends on input)   t0 * x
+C                       t1          N^2/2 - N/2           t1(N^2/2-N/2)
+B                       t2          N                     t2 * N
+A                       t3          1                     t3
+
+
+grand total: (t1/2)N^2 + (t1/2+t2)N + t3 + t0x
+tilde approximation: ~(t1/2)N^2 (assuming x is small)
+order of growth: N^2
