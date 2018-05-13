@@ -1,0 +1,14 @@
+a. ~N
+Explanation 1(more formal):
+- from here https://softwareengineering.stackexchange.com/questions/253421/running-time-of-simple-for-loops
+we came to the this sum in sigma notation:
+
+Sigma from 0 to log(N) for equation N/2^p
+
+This is geometric series, so we have known formula for finite geometric series Sn = a(1 - r^(k + 1))/(1 - k), in our case a is N, r is 1/2 and k is p, so: N(1 - (1/2)^(log(N) + 1))/(1 - (1/2)) = 2N - 2N(1/2)^(log(N) + 1) ~2N or ~N
+
+Explanation 2(more informal):
+ - for first iteration of outer loop - inner loop make whole N iterations, next iteration we get half N, each further steps implement left half to almost whole N, so we have very close to 2N, but multiplication on constant(2) is not so important for approximation, so we get ~N.
+
+b. ~N (for first iteration of outer loop - inner loop make one iteration, than two, for etc.)
+c. ~
