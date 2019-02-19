@@ -1,0 +1,8 @@
+Mathematical operations involving input numbers:
+- sum of a[i] and a[j]
+- sum of above result and a[k]
+- comparison to zero
+- check for true/false of if statement
+
+number of second inner loop occurrence ~ N^3/6, so amount of math operations is ~ 4N^3/6 of ~ 2N^3/3
+
