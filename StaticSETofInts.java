@@ -55,7 +55,7 @@ public class StaticSETofInts
 //    }
 
     public int howMany(int key) {
-        int lowestIndex =  BinSearchMod.rank(key, a);
+        int lowestIndex = BinSearchMod.rank(key, a);
         int i = lowestIndex;
         int occurrences = 0;
         while(a[i] == key) {

@@ -44,6 +44,17 @@ public class LinkedList<Item> implements Iterable<Item> {
         }
     }
 
+    public void clear() {
+        for (Node x = first; x != null; ) {
+            Node next = x.next;
+            x.item = null;
+            x.next = null;
+            x = next;
+        }
+        first = last = null;
+        N = 0;
+    }
+
     public void delete(int k) { // Exercise1320_DeleteKthNode
         if (isEmpty()) return;
         Node current = first;
