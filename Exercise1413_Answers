@@ -1,0 +1,46 @@
+For practical assumption check Exercise1413_ObjectsSizes
+
+Theoretical assumption:
+(main info on page 200 and further)
+
+a. Accumulator (40 bytes)
+      16 + 8 + 8 + 4 + 4
+      overhead - 16 bytes (The overhead includes a reference to he object’s class, garbage collection information, and synchronization information)
+      double (m) - 8 bytes
+      double (s) - 8 bytes
+      int(N) - 4 bytes
+      padding - 4 bytes (memory usage is typically padded to be a multiple of 8 bytes)
+
+b. Transaction (40 bytes)
+      16 + 8 + 8 + 8
+      overhead - 16 bytes
+      String reference - 8 bytes
+      Date reference - 8 byte
+      double - 8 bytes
+
+c. FixedCapacityStackOfStrings (32 bytes)
+    16 + 8 + 4 + 4
+    overhead - 16 bytes
+    String array reference - 8 bytes
+    int - 4 bytes
+    padding - 4 bytes
+
+
+d. Point2D (32  bytes)
+    overhead - 16 bytes
+    double - 8 bytes
+    double - 8 bytes
+
+e. Interval1D (32 bytes)
+    overhead - 16 bytes
+    double - 8 bytes
+    double - 8 bytes
+
+f. Interval2D (32 bytes)
+    overhead - 16 bytes
+    Interval1D reference - 8 bytes
+    Interval1D reference - 8 bytes
+
+g. Double (24 bytes)
+      object overhead - 16 bytes
+      primitive double - 8 bytes
