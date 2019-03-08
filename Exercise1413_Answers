@@ -16,7 +16,7 @@ b. Transaction (40 bytes)
       overhead - 16 bytes
       String reference - 8 bytes
       Date reference - 8 byte
-      double - 8 bytes
+  double - 8 bytes
 
 c. FixedCapacityStackOfStrings (32 bytes)
     16 + 8 + 4 + 4
