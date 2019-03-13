@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
-public class RandomArray {
+public class RandomArray{
     public int[] getRandomArray(int amount, int max) {
         int[] a = new int[amount];
         Random random = new Random();
@@ -9,7 +11,7 @@ public class RandomArray {
         }
         return a;
     }
-    public int[] getRandomArray(int amount, int max, int min) {
+    public int[] getRandomArray(int amount, int min, int max) {
         int[] a = new int[amount];
         Random random = new Random();
         for (int i = 0; i < amount - 1; i++) {
@@ -17,4 +19,48 @@ public class RandomArray {
         }
         return a;
     }
+    public int[] getRandomDistinctArray(int amount, int min, int max) throws Exception{
+        int[] b = new int[amount];
+        int range = 0;
+        if (min < 0) {
+            if (max > 0) range = - min + max + 1;
+            if (max < 0) range = - min - max;
+        } else if (min > 0) {
+            if (max > 0) range = max - min;
+            if (max < 0) throw new Exception();
+        }
+        int[] a = new int[range];
+        Random random = new Random();
+        for (int i = min, j = 0; i <= max && j < range ; i++, j++) {
+            a[j] = min++;
+        }
+        for (int i = 0; i < amount; i++) {
+            int randomElement = random.nextInt(max + 1);
+            b[i] = a[randomElement];
+            a = ArrayHelper.remove(randomElement, a);
+        }
+        return b;
 }
+
+    // create sequental arr with range elements each from m
+    // pick with delete arr with amount
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
