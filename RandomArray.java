@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class RandomArray{
@@ -16,6 +14,14 @@ public class RandomArray{
         Random random = new Random();
         for (int i = 0; i < amount - 1; i++) {
             a[i] = min + random.nextInt(max + 1 - min);
+        }
+        return a;
+    }
+    public double[] getRandomArray(int amount, double min, double max) {
+        double[] a = new double[amount];
+        Random random = new Random();
+        for (int i = 0; i < amount - 1; i++) {
+            a[i] = min + (max - min) * random.nextDouble();
         }
         return a;
     }
@@ -40,27 +46,7 @@ public class RandomArray{
             a = ArrayHelper.remove(randomElement, a);
         }
         return b;
+    }
+
 }
-
-    // create sequental arr with range elements each from m
-    // pick with delete arr with amount
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
